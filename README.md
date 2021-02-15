@@ -1,4 +1,4 @@
-# LTFT-ERP
+## LTFT-ERP
 CONTENTS OF THIS FOLDER 
 ——————————————
 
@@ -21,8 +21,9 @@ The contents of this folder allow for implementation of the LTFT-ERP algorithm d
 REQUIREMENTS
 ——————————————	
 
+The included R programs require Microsoft R Open 4.0.2 (Microsoft Corporation, 2020) and the packages listed in LTFT.ERP_tutorial.R.
 
 INSTALLATION
 ——————————————
 
-Load the R program files into the global environment and install required packages using commands in HPCA_tutorial.R
+Load the R program files into the global environment and install required packages using commands in LTFT.ERP_tutorial.R
