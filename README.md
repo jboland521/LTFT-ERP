@@ -1,2 +1,12 @@
 # LTFT-ERP
-Longitudinal Time-Frequency Transformation of ERP Data Algorithm
+CONTENTS OF THIS FOLDER 
+——————————————
+
+INTRODUCTION
+——————————————	
+
+REQUIREMENTS
+——————————————	
+
+INSTALLATION
+——————————————
