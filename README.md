@@ -2,17 +2,18 @@
 CONTENTS OF THIS FOLDER 
 ——————————————
 
-* LTFT.ERP_tutorial.R : A step-by-step implementation of the LTFT-ERP algorithm and the associated procedures described in "A Study of Longitudinal Trends in Time-Frequency                               Transformations of EEG Data during a Learning Experiment" by Boland et al. (2021).
+* LTFT.ERP_tutorial.R : A step-by-step implementation of the LTFT-ERP algorithm and the associated procedures described in "A Study of Longitudinal Trends in Time-Frequency                             Transformations of EEG Data during a Learning Experiment" by Boland et al. (2021).
 
-* LTFT.ERP_MTFT.ERP_reshape.R : Function for performing Step 1 and Step 2 of the LTFT-ERP algorithm. Specifically, this function filters the ERP waveforms for the                                    specified frequency band, performs the wavelet transformations to obtain the TFT power surfaces, and reshapes the subsequent TFT-surfaces into                                      vectors.
+* LTFT.ERP_MTFT.ERP_reshape.R : Function for performing Step 1 and Step 2 of the LTFT-ERP algorithm. Specifically, this function filters the ERP waveforms for the specified                                     frequency band, performs the wavelet transformations to obtain the TFT power surfaces, and reshapes the subsequent TFT-surfaces into vectors.
 
-* LTFT.ERP_MDPCA.R : Function for performing step 3 of the LTFT-ERP algorithm in which a data-driven dimension reduction of the TFT power vectors is employed via multidimensional                       principal component analysis (MDPCA). Specifically, this function estimates the trial-specific covariance matrices, the marginal covariance matrix, the leading 
-                    eigenvectors, and the resulting MDPCA scores.
+* LTFT.ERP_MDPCA.R : Function for performing step 3 of the LTFT-ERP algorithm in which a data-driven dimension reduction of the TFT power vectors is employed via                                      multidimensional principal component analysis (MDPCA). Specifically, this function estimates the trial-specific covariance matrices, the marginal covariance                      matrix, the leading eigenvectors, and the resulting MDPCA scores.
 
-* LTFT.ERP_mixedEffectsModel.R : Function for performing step 4 of the LTFT-ERP algorithm in which the longitudinal trends of the MDPCA scores are modeled via a linear mixed                                       effects model.
+* LTFT.ERP_mixedEffectsModel.R : Function for performing step 4 of the LTFT-ERP algorithm in which the longitudinal trends of the MDPCA scores are modeled via a linear mixed                                      effects model.
 
-* LTFT.ERP_simulateTFT.R : Function for simulating data for the LTFT-ERP algorithm  as detailed in section 3.1.
-
+* LTFT.ERP_simulateTFT.R : Function for data generation of the simulated TFT power vectors from the delta frequency band as detailed in Section 3.1. Specifically, the H leading                            MDPCA score trajectories are simulated using the empirical mixed effects model estimates from our motivating study. Then, the leading simulate 
+                           true mean and predicted MDPCA scores trajectories are stored in a data.frame for calculating ME and PE. Using the simulated MDPCA score trajectories
+                           and the delta frequency band empirical estimates from our motivating study of the TFT mean power vector and the leading functional eigenvectors, the
+                           simulated true TFT power vectors are reconstructed. Missingness is then induced by removing a fraction of the TFT power vectors by sampling with                                  replacement from the missingness profiles from subjects in our motivating data. After this, random noise vectors are simulated independently from a                              mean zero normal distribution whose variance is determined by the given SNR and then wavelet transformed to obtain the error TFT power vector. The                                error TFT power vector is added to the true TFT power vector to obtain the simulated TFT power vector for all observations and stored in a data.frame.                    
 INTRODUCTION
 ——————————————	
 
