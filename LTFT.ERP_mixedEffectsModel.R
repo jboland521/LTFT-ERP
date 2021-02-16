@@ -80,7 +80,7 @@ LTFT.ERP_mixedEffectsModel <- function(Scores,           # data.frame of the est
             region=pdDiag(as.formula(paste("~", paste(splines, collapse = " + "), # Subject- and region-level random effects, D^{2h} (matrix, (n.spline + 1) x (n.spline + 1))
                                            sep = ""))))
   
-  # Define Fixed effects
+  # Create design matrix for lme
   vars <- c("group", "condition", "lobe", "group*condition", "group*lobe", # Names of subgroup and subgroup interactions fixed effects variables 
             "condition*lobe", "group*condition*lobe") 
   n.vars <- length(vars) # Total number of subgroup fixed effects variables

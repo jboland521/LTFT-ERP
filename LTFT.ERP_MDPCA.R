@@ -26,7 +26,7 @@ LTFT.ERP_MDPCA <- function(X.data,   # data.frame in wide format with (4 + m) la
   ##              the resulting MDPCA scores.
   ## Args:        (see above)
   ## Returns:     list()
-  ##              X.Mean: Average power vector across all observations. (vector, m x 1)
+  ##              X.Mean: Estimated TFT mean power vector. \bar{X} (vector, m x 1)
   ##              XX.s: Trial-specific covariance matrices. (list)
   ##              XX: Marginal covariance matrix. (matrix, m x m)
   ##              Phi: Estimated leading eigenvectors. (matrix, m x H)
