@@ -6,7 +6,7 @@ LTFT.ERP_simulateTFT <- function(N.group,       # group (ASD/TD) sample size (sc
                                  f_tot,         # total number of scale (frequency) parameters, F (scalar)
                                  d_tot,         # total number of translation (time, u) parameters, D (scalar)
                                  s,             # longitudinal domain grid (vector)
-                                 MissProf,      # data.frame of missingness profiles of subjects from our motivating data
+                                 MissProf,      # data.frame of missingness profiles of subjects
                                                 # with 6 labeled columns (described below)
                                                    # DATA.FRAME COLUMNS:
                                                    # miss.id: missingness profile subject ID, i \in {1,...,N} (vector)
@@ -34,16 +34,16 @@ LTFT.ERP_simulateTFT <- function(N.group,       # group (ASD/TD) sample size (sc
   #############################################################################
   ## Description: Function for data generation of the simulated TFT power vectors from the delta frequency band as 
   ##              detailed in Section 3.1. Specifically, the H leading MDPCA score trajectories are simulated 
-  ##              using \the empirical mixed effects model estimates from our motivating study. Then, the leading
-  ##              (h = 1) simulated true mean and predicted MDPCA scores trajectories are stored in a data.frame 
+  ##              using the empirical mixed effects model estimates from our data analysis. Then, the 
+  ##              (h = 1) simulated true mean and predicted MDPCA scores trajectories associated with the leading eigenvector (h = 1) are stored in a data.frame 
   ##              for future calculations of ME and PE. Missingness is then induced by removing a fraction of the 
   ##              TFT power vectors by sampling with replacement from the missingness profiles from subjects in 
-  ##              our motivating data. Using the simulated MDPCA score trajectories and the delta frequency band 
-  ##              empirical estimates from our motivating study of the TFT mean power vector and the leading
-  ##              functional eigenvectors, the simulated true TFT power vectors are reconstructed. After this, 
-  ##              random noise vectors of length m = f_tot x d_tot are simulated idependently from a mean zero 
-  ##              normal distribution whose variance is determined by the given SNR. The random noise vector is 
-  ##              then wavelet transformed to obtain the error TFT power vector. The error TFT power vector is 
+  ##              our data. Using the simulated MDPCA score trajectories and the delta frequency band 
+  ##              empirical estimates of the TFT mean power vector and the leading functional eigenvectors,
+  ##              the simulated true TFT power vectors are reconstructed. After this, random noise vectors 
+  ##              of length m = f_tot x d_tot are simulated idependently from a mean zero normal distribution 
+  ##              whose variance is determined by the given SNR. The random noise vector is then wavelet
+  ##              transformed to obtain the error TFT power vector. The error TFT power vector is 
   ##              added to the true TFT power vector to obtain the simulated TFT power vector for all 
   ##              observations and stored in a data.frame.
   ## Args:        (see above)
@@ -71,7 +71,7 @@ LTFT.ERP_simulateTFT <- function(N.group,       # group (ASD/TD) sample size (sc
   ## Simulation Outline:
   ##              1. Define model components
   ##              2. Simulate the H leading longtudinal MDPCA scores trajectories
-  ##              3. Induce missingness from missingness profile from motivating study
+  ##              3. Induce missingness from missingness profile 
   ##              4. Simulate the power vectors 
   ##              5. Add random noise to power vectors at specified SNR
   #############################################################################
@@ -117,14 +117,14 @@ LTFT.ERP_simulateTFT <- function(N.group,       # group (ASD/TD) sample size (sc
   # effects modeling from our motiviating study
   scores.sim <- function(h){
     
-    # a. Define empirical model estimates from motivating study
+    # a. Define empirical model estimates 
     
     # Fixed effects, b^h (vector, 40 x 1)
     B <- fixed.effects[[h]]
     
     # Random effects
-    D1 <- diag(sqrt(0.15*random.effects[[h]][[1]])) # Subject-specific, D^{1h} (matrix, (n.spline + 1) x (n.spline + 1))
-    D2 <- diag(sqrt(0.15*random.effects[[h]][[2]])) # Subject- and region-specific, D^{2h} (matrix, (n.spline + 1) x (n.spline + 1))
+    D1 <- diag(sqrt(random.effects[[h]][[1]])) # Subject-specific, D^{1h} (matrix, (n.spline + 1) x (n.spline + 1))
+    D2 <- diag(sqrt(random.effects[[h]][[2]])) # Subject- and region-specific, D^{2h} (matrix, (n.spline + 1) x (n.spline + 1))
     
     # b. Create data.frame to store indices and simulated MDPCA scores 
     
@@ -256,7 +256,7 @@ LTFT.ERP_simulateTFT <- function(N.group,       # group (ASD/TD) sample size (sc
   Scores.Sim <- data.table(Scores.Sim) # Format as data.table
   
   #############################################################################
-  # 3. Induce missingness from missingness profile from motivating study
+  # 3. Induce missingness from missingness profile 
   #############################################################################
   
   # Format the missingess profile data
